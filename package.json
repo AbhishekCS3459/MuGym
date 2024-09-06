@@ -27,6 +27,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
     "react-youtube": "^10.1.0",
+    "recoil": "^0.7.7",
     "spotify-url-info": "^3.2.16",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
