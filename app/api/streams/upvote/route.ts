@@ -1,3 +1,4 @@
+// this is route for upvoting a stream at /api/streams/upvote
 import prismaClient from "@/app/lib/db";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
 
     // create upvote
     const data = UpvoteSchema.parse(await req.json());
+    
     const upvote = await prismaClient.upvote.create({
             data: {
                 userId: user.id,
