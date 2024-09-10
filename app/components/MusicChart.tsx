@@ -12,8 +12,20 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function MusicChart() {
-  const [isPlaying, setIsPlaying] = useState(false);
+export default function MusicChart({
+  isPlaying,
+  Songtitle,
+  Imagesrc,
+  setIsPlaying,
+  isButtonRequired,
+}: {
+  isPlaying: boolean;
+  Songtitle: string;
+  Imagesrc: string;
+  setIsPlaying: (isPlaying: boolean) => void;
+  isButtonRequired: boolean;
+}) {
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
@@ -40,37 +52,40 @@ export default function MusicChart() {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <img
-            src="https://github.com/shadcn.png"
+            src={Imagesrc}
             alt="Album cover"
             className="w-16 h-16 rounded-md mr-4"
           />
           <div>
-            <h4 className="font-semibold text-lg">Intro</h4>
+            <h4 className="font-semibold text-lg">{Songtitle}</h4>
             <p className="text-gray-600">MuGym</p>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-          <Button
-            onClick={togglePlay}
-            size="icon"
-            variant="ghost"
-            className="text-red-500 hover:text-red-600 hover:bg-red-100"
-          >
-            {isPlaying ? (
-              <Pause className="h-6 w-6" />
-            ) : (
-              <Play className="h-6 w-6" />
-            )}
-          </Button>
-          <Button
-            onClick={nextTrack}
-            size="icon"
-            variant="ghost"
-            className="text-red-500 hover:text-red-600 hover:bg-red-100"
-          >
-            <SkipForward className="h-6 w-6" />
-          </Button>
-        </div>
+
+        {isButtonRequired && (
+          <div className="flex items-center space-x-4">
+            <Button
+              onClick={togglePlay}
+              size="icon"
+              variant="ghost"
+              className="text-red-500 hover:text-red-600 hover:bg-red-100"
+            >
+              {isPlaying ? (
+                <Pause className="h-6 w-6" />
+              ) : (
+                <Play className="h-6 w-6" />
+              )}
+            </Button>
+            <Button
+              onClick={nextTrack}
+              size="icon"
+              variant="ghost"
+              className="text-red-500 hover:text-red-600 hover:bg-red-100"
+            >
+              <SkipForward className="h-6 w-6" />
+            </Button>
+          </div>
+        )}
       </div>
       <div className="relative h-24 bg-gray-200 rounded-lg overflow-hidden">
         <div className="absolute inset-0 flex items-end justify-around">

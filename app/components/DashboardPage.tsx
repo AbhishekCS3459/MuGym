@@ -8,6 +8,7 @@ import { ThumbsUp, ThumbsDown, Play, Pause, SkipForward } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import YouTube from "react-youtube";
 import { useSession } from "next-auth/react";
+import MusicChart from "./MusicChart";
 
 type Song = {
   id: string;
@@ -213,7 +214,7 @@ export default function DashboardPage() {
     //   // first add the current song to recently played in db
     //   await addToRecent();
     //   alert("Song Added to ended"+currentSong?.id);
-       
+
     //   // then remove the current song from db
     //   await fetch(`/api/streams/${currentSong?.id}`, {
     //     method: "DELETE",
@@ -226,7 +227,6 @@ export default function DashboardPage() {
     // then play next song
     playNext(); // Play the next song after the current one ends
   };
-
   useEffect(() => {
     if (!currentSong && queue.length > 0) {
       playNext();
@@ -251,7 +251,8 @@ export default function DashboardPage() {
 
       <Card className="bg-white/80 backdrop-blur-sm">
         <CardContent className="p-6 space-y-4">
-          <h2 className="text-2xl font-semibold text-black">Add a Song</h2>
+          <h2 className="text-2xl font-semibold text-black">Add your Song</h2>
+
           <div className="flex space-x-2">
             <Input
               type="text"
@@ -343,6 +344,8 @@ export default function DashboardPage() {
                   videoId={currentSong.id}
                   opts={videoOptions}
                   onEnd={handleEnd}
+                  onPause={() => setIsPlaying(false)}
+                  onPlay={() => setIsPlaying(true)}
                 />
                 <h3 className="text-xl font-semibold text-black">
                   {currentSong.title}
@@ -367,6 +370,16 @@ export default function DashboardPage() {
                 No song currently playing
               </p>
             )}
+          </CardContent>
+          <CardContent className="p-6">
+            <MusicChart
+              isPlaying={isPlaying}
+              Songtitle={currentSong?.title || "Intro"}
+              Imagesrc={currentSong?.thumbnail || "https://github.com/shadcn.png"}
+              setIsPlaying={setIsPlaying}
+              
+              isButtonRequired={false}
+            />
           </CardContent>
         </Card>
         <Card className="bg-white/80 backdrop-blur-sm">

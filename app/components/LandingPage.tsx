@@ -47,7 +47,13 @@ export default function LandingPage() {
         </section>
 
         <section className="mb-16">
-          <MusicChart />
+          <MusicChart
+            isPlaying={true}
+            Songtitle="Intro"
+            Imagesrc="https://github.com/shadcn.png"
+            setIsPlaying={() => {}}
+            isButtonRequired={true}
+          />
         </section>
 
         <section className="grid md:grid-cols-3 gap-8 mb-16">

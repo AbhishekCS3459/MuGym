@@ -51,13 +51,13 @@ export async function POST(req: NextRequest) {
     // create upvote
     const data = UpvoteSchema.parse(await req.json());
     
-    const upvote = await prismaClient.upvote.create({
-            data: {
-                userId: user.id,
-                streamId: data.streamId
-            }
-        });
-
+    // const upvote = await prismaClient.upvote.create({
+    //         data: {
+    //             userId: user.id,
+    //             streamId: data.streamId
+    //         }
+    //     });
+    
     return NextResponse.json({ message: "Done Upvote!" }, { status: 200 });
   } catch (error) {
     console.log(error);
