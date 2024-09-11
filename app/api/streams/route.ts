@@ -54,6 +54,15 @@ export async function POST(req: Request) {
 
     if (isYt) {
       const videoDetails = await youtubeserarchapi.GetVideoDetails(extractedId);
+      if (
+        !videoDetails ||
+        !videoDetails.thumbnail ||
+        !videoDetails.thumbnail.thumbnails
+      ) {
+        return NextResponse.json({
+          error: "No thumbnails found for the video",
+        });
+      }
       const thumbnail = videoDetails.thumbnail.thumbnails;
 
       thumbnail.sort(
@@ -95,9 +104,7 @@ export async function POST(req: Request) {
           userId: data.creatorId,
         },
       });
-      console.log(
-        "Song Added"
-      );
+      console.log("Song Added");
       // Return a success response
       return NextResponse.json({ msg: "stream created", stream: stream });
     }
@@ -131,7 +138,7 @@ export async function DELETE(req: Request) {
         id: streamId,
       },
     });
-    
+
     return NextResponse.json({ msg: "stream deleted", stream });
   } catch (error: any) {
     return NextResponse.json({ error: error.message });
