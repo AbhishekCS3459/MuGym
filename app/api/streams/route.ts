@@ -59,6 +59,7 @@ export async function POST(req: Request) {
         !videoDetails.thumbnail ||
         !videoDetails.thumbnail.thumbnails
       ) {
+        console.log("No thumbnails found for the video");
         return NextResponse.json({
           error: "No thumbnails found for the video",
         });
