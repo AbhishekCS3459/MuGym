@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import YouTube from "react-youtube";
 import { useSession } from "next-auth/react";
 import MusicChart from "./MusicChart";
-import Image from "next/image";
+
 type Song = {
   id: string;
   title: string;
@@ -270,7 +270,7 @@ export default function DashboardPage() {
             </Button>
           </div>
           {videoLink && extractVideoId(videoLink) && (
-            <Image
+            <img
               src={`https://img.youtube.com/vi/${extractVideoId(
                 videoLink
               )}/0.jpg`}
@@ -296,7 +296,7 @@ export default function DashboardPage() {
                 >
                   <Card className="mb-4 overflow-hidden bg-gradient-to-r from-grey-200 to-grey-400 hover:from-gray-300 hover:to-red-600 transition-all duration-300">
                     <CardContent className="p-4 flex items-center space-x-4">
-                      <Image
+                      <img
                         src={song.thumbnail}
                         alt={song.title}
                         className="w-20 h-20 object-cover rounded-md shadow-md"
@@ -390,7 +390,7 @@ export default function DashboardPage() {
             <div className="flex overflow-x-auto space-x-4 pb-4">
               {history.map((song) => (
                 <div key={song.id} className="flex-shrink-0 w-32">
-                  <Image
+                  <img
                     src={song.thumbnail}
                     alt={song.title}
                     className="w-32 h-24 object-cover rounded-md shadow-md mb-2"

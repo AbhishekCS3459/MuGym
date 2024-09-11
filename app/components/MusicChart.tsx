@@ -11,7 +11,7 @@ import {
   SkipForward,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 export default function MusicChart({
   isPlaying,
   Songtitle,
@@ -51,7 +51,7 @@ export default function MusicChart({
     <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <Image
+          <img
             src={Imagesrc}
             alt="Album cover"
             className="w-16 h-16 rounded-md mr-4"
