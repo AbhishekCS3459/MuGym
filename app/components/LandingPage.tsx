@@ -19,6 +19,7 @@ import FeatureCard from "./FeatureCard";
 import StepCard from "./StepCard";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LandingPage() {
   const session = useSession();
@@ -28,7 +29,7 @@ export default function LandingPage() {
       <main className="container mx-auto px-4 py-16">
         <section className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-4 text-gray-900 animate-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#e11d48,45%,#f43f5e,55%,#e11d48)] bg-[length:200%_100%]">
-            Let Your Fans Choose Your Stream Soundtrack
+            Let Your Choose Your Stream in Gym
           </h2>
           <p className="text-xl mb-8 text-gray-700">
             Engage your audience like never before with fan-picked music
@@ -105,23 +106,21 @@ export default function LandingPage() {
             Join thousands of creators who are boosting engagement with
             MusicChoice
           </p>
-          {session.data?.user ? (
-            <Button
-              size="lg"
-              className="bg-red-500 hover:bg-red-600 text-white hover:animate-out"
-              onClick={() => router.push("/dashboard")}
-            >
-              Dashboard
-            </Button>
-          ) : (
-            <Button
-              size="lg"
-              className="bg-red-500 hover:bg-red-600 text-white"
-              onClick={() => router.push("/api/auth/signin")}
-            >
-              Sign Up Now
-            </Button>
-          )}
+
+          <div className="flex justify-center">
+            <div className="bg-gray-100 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <img
+                src="/profile.jpeg"
+                alt="Girl in a jacket"
+                className="w-36 h-36 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto"
+              ></img>
+
+              <h4 className="text-xl font-semibold mb-2 text-gray-900">
+                Abhishek Kumar Verma
+              </h4>
+              <p className="text-gray-700">SDE Intern at Pegman</p>
+            </div>
+          </div>
         </section>
       </main>
 
