@@ -96,7 +96,7 @@ export async function POST(req: Request) {
         },
       });
       console.log(
-        "Song Added------------------------------------------------>"
+        "Song Added"
       );
       // Return a success response
       return NextResponse.json({ msg: "stream created", stream: stream });
