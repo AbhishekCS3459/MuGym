@@ -54,24 +54,25 @@ export async function POST(req: Request) {
 
     if (isYt) {
       const videoDetails = await youtubeserarchapi.GetVideoDetails(extractedId);
-      if (
-        !videoDetails ||
-        !videoDetails.thumbnail ||
-        !videoDetails.thumbnail.thumbnails
-      ) {
-        console.log("No thumbnails found for the video");
-        return NextResponse.json({
-          error: "No thumbnails found for the video",
-        });
-      }
-      const thumbnail = videoDetails.thumbnail.thumbnails;
+        
+      let thumbnailData;
 
-      thumbnail.sort(
-        (
-          a: { width: number; height: number },
-          b: { width: number; height: number }
-        ) => (a.width * a.height > b.width * b.height ? 1 : -1)
-      );
+      let smallImgUrl =
+          "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid",
+        bigImgUrl =
+          "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid";
+
+      if (videoDetails.thumbnail) {
+        thumbnailData = videoDetails.thumbnail.thumbnails;
+        thumbnailData.sort(
+          (
+            a: { width: number; height: number },
+            b: { width: number; height: number }
+          ) => (a.width * a.height > b.width * b.height ? 1 : -1)
+        );
+        smallImgUrl = thumbnailData[0]?.url;
+        bigImgUrl = thumbnailData[thumbnailData.length - 1]?.url;
+      }
       // logic for max queue length weather to add song or not
       const existingStreams = await prismaClient.stream.count({
         where: {
@@ -95,12 +96,8 @@ export async function POST(req: Request) {
           url: data.url,
           extractedId,
           title: videoDetails.title || "Youtube Video Title",
-          smallImg:
-            thumbnail[0].url ||
-            "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid",
-          bigImg:
-            thumbnail[videoDetails.thumbnail.thumbnails.length - 1].url ||
-            "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid",
+          smallImg: smallImgUrl,
+          bigImg: bigImgUrl,
           active: true,
           userId: data.creatorId,
         },
