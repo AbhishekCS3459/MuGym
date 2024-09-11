@@ -107,7 +107,7 @@ export default function LandingPage() {
             MusicChoice
           </p>
 
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className="bg-gray-100 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <img
                 src="https://drive.google.com/file/d/1lS8Y9pEN4Rq-Xy1Fb3iCmowbyfd7luq2/view?usp=sharing"
@@ -120,7 +120,7 @@ export default function LandingPage() {
               </h4>
               <p className="text-gray-700">SDE Intern at Pegman</p>
             </div>
-          </div>
+          </div> */}
         </section>
       </main>
 
