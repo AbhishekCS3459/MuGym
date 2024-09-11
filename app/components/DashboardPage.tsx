@@ -189,7 +189,7 @@ export default function DashboardPage() {
     });
   };
 
-  const playNext = useCallback(async() => {
+  const playNext = useCallback(async () => {
     if (queue.length > 0) {
       const sortedQueue = [...queue].sort((a, b) => b.votes - a.votes);
 
@@ -244,12 +244,12 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="p-4 space-y-6  bg-gradient-to-br from-gray-100 to-gray-900 ">
+    <div className="min-h-screen p-4 space-y-6 bg-black">
       <h1 className="text-3xl font-bold text-center text-black mb-8">
         Song Voting Queue
       </h1>
 
-      <Card className="bg-white/80 backdrop-blur-sm">
+      <Card className="bg-white shadow-lg hover:shadow-yellow-200  backdrop-blur-sm">
         <CardContent className="p-6 space-y-4">
           <h2 className="text-2xl font-semibold text-black">Add your Song</h2>
 
@@ -281,8 +281,8 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 width-[100%]">
-        <Card className="bg-white/80 backdrop-blur-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 width-[80%] ">
+        <Card className="bg-white shadow-lg hover:shadow-yellow-200 backdrop-blur-sm">
           <CardContent className="p-6">
             <h2 className="text-2xl font-semibold text-black mb-4">Queue</h2>
             <AnimatePresence>
@@ -333,20 +333,26 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white/80 backdrop-blur-sm">
-          <CardContent className="p-6">
-            <h2 className="text-2xl font-semibold text-black mb-4">
+        <Card className="bg-white shadow-lg hover:shadow-yellow-200  backdrop-blur-sm overflow-hidden  ">
+          <CardContent className="py-3">
+          <h2 className="text-2xl font-semibold text-black mb-4">
               Now Playing
             </h2>
             {currentSong ? (
               <div className="space-y-4">
-                <YouTube
-                  videoId={currentSong.id}
-                  opts={videoOptions}
-                  onEnd={handleEnd}
-                  onPause={() => setIsPlaying(false)}
-                  onPlay={() => setIsPlaying(true)}
-                />
+                <div
+                className="relative w-full h-96 "
+                >
+                  <YouTube
+                    videoId={currentSong.id}
+                    opts={videoOptions}
+                    onEnd={handleEnd}
+                    onPause={() => setIsPlaying(false)}
+                    onPlay={() => setIsPlaying(true)}
+                    className="absolute w-full h-full "
+                    //write the style to make the video responsive
+                  />
+                </div>
                 <h3 className="text-xl font-semibold text-black">
                   {currentSong.title}
                 </h3>
@@ -371,13 +377,14 @@ export default function DashboardPage() {
               </p>
             )}
           </CardContent>
-          <CardContent className="p-6">
+          <CardContent className="p-6 w-full">
             <MusicChart
               isPlaying={isPlaying}
               Songtitle={currentSong?.title || "Intro"}
-              Imagesrc={currentSong?.thumbnail || "https://github.com/shadcn.png"}
+              Imagesrc={
+                currentSong?.thumbnail || "https://github.com/shadcn.png"
+              }
               setIsPlaying={setIsPlaying}
-              
               isButtonRequired={false}
             />
           </CardContent>
