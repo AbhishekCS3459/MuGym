@@ -61,7 +61,7 @@ export async function POST(req: Request) {
           "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid",
         bigImgUrl =
           "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725494400&semt=ais_hybrid";
-
+        console.log("videoDetails", videoDetails);
       if (videoDetails.thumbnail) {
         thumbnailData = videoDetails.thumbnail.thumbnails;
         thumbnailData.sort(
