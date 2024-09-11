@@ -110,8 +110,8 @@ export default function LandingPage() {
           <div className="flex justify-center">
             <div className="bg-gray-100 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <img
-                src="/profile.jpeg"
-                alt="Girl in a jacket"
+                src="https://drive.google.com/file/d/1lS8Y9pEN4Rq-Xy1Fb3iCmowbyfd7luq2/view?usp=sharing"
+                alt="Abhishek Kumar Verma"
                 className="w-36 h-36 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto"
               ></img>
 
