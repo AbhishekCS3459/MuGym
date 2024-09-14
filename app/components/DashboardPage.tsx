@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { ThumbsUp, ThumbsDown, Play, Pause, SkipForward } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Play, Pause, SkipForward, ArrowUpFromLine, ArrowDownFromLine } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import YouTube from "react-youtube";
 import { useSession } from "next-auth/react";
@@ -63,7 +63,7 @@ export default function DashboardPage() {
   const session = useSession();
   useEffect(() => {
     refreshStreams();
-    const interval = setInterval(() => {}, REFRESH_INTERVAL_MS);
+    const interval = setInterval(() => { }, REFRESH_INTERVAL_MS);
     return () => clearInterval(interval);
   }, []);
 
@@ -295,35 +295,37 @@ export default function DashboardPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <Card className="mb-4 overflow-hidden bg-gradient-to-r from-grey-200 to-grey-400 hover:from-gray-300 hover:to-red-600 transition-all duration-300">
-                    <CardContent className="p-4 flex items-center space-x-4">
+                    <CardContent className="p-4 flex items-center space-x-4 relative">
                       <img
                         src={song.thumbnail}
                         alt={song.title}
                         className="w-20 h-20 object-cover rounded-md shadow-md"
                       />
-                      <div className="flex-grow">
-                        <h3 className="font-semibold text-black">
-                          {song.title}
-                        </h3>
-                        <p className="text-sm text-black">
-                          Votes: {song.votes}
-                        </p>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          size="sm"
-                          onClick={() => vote(song.id, 1, true)}
-                          className="bg-green-500 hover:bg-green-600"
-                        >
-                          <ThumbsUp size={18} />
-                        </Button>
-                        <Button
-                          size="sm"
-                          onClick={() => vote(song.id, -1, false)}
-                          className="bg-red-500 hover:bg-red-600"
-                        >
-                          <ThumbsDown size={18} />
-                        </Button>
+                      <div className="w-[75%] ">
+                        <div className="w-full flex-grow -mt-8">
+                          <h3 className="font-semibold text-black w-[92%] truncate">
+                            {song.title}
+                          </h3>
+                          <p className="text-sm text-black">
+                            Votes: {song.votes}
+                          </p>
+                        </div>
+                        <div className="absolute bottom-2 right-3 flex space-x-2 justify-end">
+                          <Button
+                            size="sm"
+                            onClick={() => vote(song.id, 1, true)}
+                            className="bg-green-500 hover:bg-green-600"
+                          >
+                            <ArrowUpFromLine size={18} />
+                          </Button>
+                          <Button
+                            size="sm"
+                            onClick={() => vote(song.id, -1, false)}
+                            className="bg-red-500 hover:bg-red-600"
+                          >
+                            <ArrowDownFromLine size={18} />
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -334,14 +336,14 @@ export default function DashboardPage() {
         </Card>
 
         <Card className="bg-white shadow-lg hover:shadow-yellow-200  backdrop-blur-sm overflow-hidden  ">
-          <CardContent className="py-3">
-          <h2 className="text-2xl font-semibold text-black mb-4">
+          <CardContent className="py-3 flex flex-col">
+            <h2 className="text-2xl font-semibold text-black mb-4">
               Now Playing
             </h2>
             {currentSong ? (
               <div className="space-y-4">
                 <div
-                className="relative w-full h-96 "
+                  className="relative h-96 w-full"
                 >
                   <YouTube
                     videoId={currentSong.id}
@@ -349,24 +351,21 @@ export default function DashboardPage() {
                     onEnd={handleEnd}
                     onPause={() => setIsPlaying(false)}
                     onPlay={() => setIsPlaying(true)}
-                    className="absolute w-full h-full "
-                    //write the style to make the video responsive
+                    className="absolute w-full h-full"
+                    iframeClassName="w-full h-full"
+                  //write the style to make the video responsive
                   />
                 </div>
                 <h3 className="text-xl font-semibold text-black">
                   {currentSong.title}
                 </h3>
-                <div className="flex justify-center space-x-4">
-                  <Button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="bg-black hover:bg-red-500"
-                  >
-                    {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-                  </Button>
+                <div className="w-full h-full flex justify-center items-center">
+
                   <Button
                     onClick={playNext}
-                    className="bg-black hover:bg-red-500"
+                    className="bg-black hover:bg-slate-800 h-10 w-[90%] flex justify-center items-center space-x-3"
                   >
+                    <p className="text-white text-center font-semibold text-[16px]">Play next</p>
                     <SkipForward size={24} />
                   </Button>
                 </div>
