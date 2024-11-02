@@ -29,7 +29,7 @@ export default function LandingPage() {
       <main className="container mx-auto px-4 py-16">
         <section className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-4 text-gray-900 animate-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#e11d48,45%,#f43f5e,55%,#e11d48)] bg-[length:200%_100%]">
-            Let Your Choose Your Stream in Gym
+            Let You Choose Your Music in Gym
           </h2>
           <p className="text-xl mb-8 text-gray-700">
             Engage your audience like never before with fan-picked music
